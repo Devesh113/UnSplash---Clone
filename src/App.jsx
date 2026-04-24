@@ -1,14 +1,29 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
+import Home from './pages/Home/Home'
+import Feed from './pages/Feed/Feed'
+import PhotoDetail from './pages/PhotoDetail/PhotoDetail'
+import SearchResults from './pages/SearchResults/SearchResults'
+import './App.css'
 
-const App = () => {
+function App() {
   return (
-    <BrowserRouter>
+    <div className="app-shell">
       <Navbar />
-      <Sidebar/>
-    </BrowserRouter>
+      <div className="app-body">
+        <Sidebar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Navigate to="/feed" replace />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/photo/:id" element={<PhotoDetail />} />
+            <Route path="/search" element={<SearchResults />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
   )
 }
 
